@@ -9,9 +9,9 @@ app = Flask(__name__)
 def index():
     return 'hello name'
 
-@app.route('/hello')
-def hello():
-    return render_template('index.html')
+@app.route('/hello/<user>')
+def hello(user):
+    return render_template('index.html',user_data=user)
 
 @app.route('/user/<string:username>')
 def username(username):
