@@ -8,7 +8,9 @@ app = Flask(__name__)
 @app.route('/login',methods=['GET','POST'])
 def login():
     if request.method  == 'POST':
-        return 'Hello' + request.values['username']
+        #  url_for('function name') 
+        return redirect(url_for('hello',username=request.values['username']))
+    
     return render_template('login.html')
     
 
@@ -16,9 +18,9 @@ def login():
 def index():
     return 'hello name'
 
-@app.route('/hello/<user>')
-def hello(user):
-    return render_template('index.html',user_data=user)
+@app.route('/hello/<username>')
+def hello(username):
+    return render_template('index.html',user_data=username)
 
 @app.route('/user/<string:username>')
 def username(username):
