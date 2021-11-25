@@ -1,4 +1,6 @@
 from flask import Flask
+from flask import url_for
+from werkzeug.utils import redirect
 
 app = Flask(__name__)
 
@@ -13,6 +15,13 @@ def username(username):
 @app.route('/age/<int:age>')
 def userage(age):
     return 'I am ' + str(age) + ' years old '
+
+@app.route('/a')
+def url_for_a():
+    return 'Here is a' 
+@app.route('/b')
+def b():
+    return redirect(url_for('url_for_a'))
 
 if __name__ == '__main__':
     app.debug = True
