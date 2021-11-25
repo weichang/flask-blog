@@ -1,12 +1,17 @@
 from flask import Flask
 from flask import url_for
 from werkzeug.utils import redirect
+from flask import render_template
 
 app = Flask(__name__)
 
 @app.route('/')
 def index():
     return 'hello name'
+
+@app.route('/hello')
+def hello():
+    return render_template('index.html')
 
 @app.route('/user/<string:username>')
 def username(username):
