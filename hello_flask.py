@@ -1,17 +1,28 @@
-from flask import Flask ,request
-from flask import url_for
+from flask import Flask ,request , flash , url_for , render_template
 from werkzeug.utils import redirect
-from flask import render_template
+import os
 
 app = Flask(__name__)
+app.secret_key = "sdcascsacdas"
 
 @app.route('/login',methods=['GET','POST'])
 def login():
     if request.method  == 'POST':
         #  url_for('function name') 
-        return redirect(url_for('hello',username=request.values['username']))
+        username = request.values['username']
+        password = request.values['password']
+        
+        if login_check(username,password) :
+            flash('Login Success !!!!')
+            return redirect(url_for('hello',username=username))
     
     return render_template('login.html')
+
+def login_check(username,password):
+    if username == 'admin' and password == '123456':
+        return True
+    else:
+        return False
     
 
 @app.route('/')
@@ -36,6 +47,10 @@ def url_for_a():
 @app.route('/b')
 def b():
     return redirect(url_for('url_for_a'))
+
+@app.route('/s')
+def s():
+    return  str(os.urandom(16))
 
 if __name__ == '__main__':
     app.debug = True
