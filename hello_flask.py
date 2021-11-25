@@ -1,9 +1,16 @@
-from flask import Flask
+from flask import Flask ,request
 from flask import url_for
 from werkzeug.utils import redirect
 from flask import render_template
 
 app = Flask(__name__)
+
+@app.route('/login',methods=['GET','POST'])
+def login():
+    if request.method  == 'POST':
+        return 'Hello' + request.values['username']
+    return render_template('login.html')
+    
 
 @app.route('/')
 def index():
